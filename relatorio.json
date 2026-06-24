@@ -1,0 +1,27 @@
+{
+    "dupla": {
+        "nome": "dupla 23",
+        "alunos": [
+          {"nome": "Bruno dos Santos Navas", "matricula": "26150425"},
+          {"nome": "Bruno Alcantara", "matricula": "19205027"},
+          {"nome": "Chancel Olivier Sèdjro Affanchao", "matrícula": "20150665"}        
+        ]
+    },
+    "quartus": {
+        "os": "Windows 11 (Quartus Prime Lite)",
+        "versao": "25.1",
+        "fpga": {
+            "familia": "Cyclone IV E",
+            "dispositivo": "EP4CE40F29C7"
+        }
+    },
+    "utilizacao": {
+        "total combinational functions": 58,
+        "dedicated logic registers": 57,
+        "total pins":41
+    },
+    "atraso": {
+        "Fmax": 208.64,
+        "unidade": "MHz"
+    }
+}

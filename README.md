@@ -2,8 +2,9 @@
 
 ## Integrantes
 
-- Bruno Navas — Matrícula: 26150425
+- Bruno dos Santos Navas — Matrícula: 26150425
 - Bruno Alcântara — Matrícula: 19205027
+- Chancel Olivier Sèdjro Affanchao — Matrícula: 20150665
 
 ## Descrição do projeto
 

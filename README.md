@@ -37,4 +37,24 @@ A verificação funcional do sistema foi desenhada com foco em **determinismo e 
   4. Vetores de valores arbitrários validados matematicamente.
 * **Isolamento de Falhas:** Além do testbench unificado, cada arquitetura possui o seu próprio ambiente de simulação isolado (`mse_tb_mult.vhdl` e `mse_tb_lut.vhdl`), permitindo inspeção limpa de sinais no analisador de ondas.
 
+## Estrutura do Repositório
+
+```text
+├── rtl/
+│   ├── mse_pack.vhdl             # Pacote de tipos e constantes globais
+│   ├── mse_bc.vhdl               # Bloco de Controle (FSM - Máquina de Estados)
+│   ├── signed_subtractor.vhdl    # Subtrator com sinal (A - B)
+│   ├── unsigned_register.vhdl    # Registo acumulador genérico
+│   ├── square_mult.vhdl          # Quadrado aritmético (MULT)
+│   ├── square_lut.vhdl           # Quadrado em memória ROM (LUT)
+│   ├── mse_bo_*.vhdl             # Blocos Operacionais de cada versão
+│   ├── mse_top_*.vhdl            # Entidades de topo conectando BC + BO
+│   └── testbench/
+│       ├── mse_tb.vhdl           # Testbench Unificado (Golden Model)
+│       ├── mse_tb_mult.vhdl      # Testbench isolado [MULT]
+│       └── mse_tb_lut.vhdl       # Testbench isolado [LUT]
+└── relatorio.json                # Exportação de metadados de compilação
+
+*.vhdl indica que foi feito para ambas as arquiteturas.
+
 

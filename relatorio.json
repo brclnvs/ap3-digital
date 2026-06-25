@@ -18,7 +18,8 @@
     "utilizacao": {
         "total combinational functions": 58,
         "dedicated logic registers": 57,
-        "total pins":41
+        "total pins":41,
+        "multiplier"
     },
     "atraso": {
         "Fmax": 208.64,

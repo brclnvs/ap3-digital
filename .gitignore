@@ -1,0 +1,20 @@
+#gtkwave files
+*.vcd
+*.ghw
+
+#ghdl comp files
+*.cf
+*.o
+
+#testbench executables
+mse_tb_mult
+mse_tb_lut
+sad_tb
+mux_2to1_tb
+unsigned_adder_tb
+signed_subtractor_tb
+absolute_difference_tb
+unsigned_register_tb
+
+*.log
+*~

@@ -1,0 +1,23 @@
+{
+    "name": "MSE Projet",
+    "build": {
+        "dockerfile": "Containerfile"
+    },
+
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "vhdl.ghdl.path":"ghdl"
+            },
+            "extensions": [
+                "ms-vscode.makefile-tools",
+                "mshr-h.VerilogHDL"
+            ]
+        }
+    },
+
+    "remoteUser": "vscode",
+
+    "updateRemoteUserUID": true
+}

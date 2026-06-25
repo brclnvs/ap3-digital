@@ -19,5 +19,9 @@
 
     "remoteUser": "vscode",
 
-    "updateRemoteUserUID": true
+    "updateRemoteUserUID": true,
+    
+    "mounts":[
+        "source=/home/b/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ]
 }

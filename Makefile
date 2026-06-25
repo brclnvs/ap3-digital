@@ -29,17 +29,28 @@ SRC_LUT = $(COMMON_SRC) \
 	$(RTL)/mse_top_lut.vhdl \
 	$(TB)/mse_tb_lut.vhdl
 
+# Fontes para o testbench unificado (Golden Model interno)
+SRC_MAIN = $(COMMON_SRC) \
+	$(RTL)/square_mult.vhdl \
+	$(RTL)/mse_bo_mult.vhdl \
+	$(RTL)/mse_top_mult.vhdl \
+	$(RTL)/square_lut.vhdl \
+	$(RTL)/mse_bo_lut.vhdl \
+	$(RTL)/mse_top_lut.vhdl \
+	$(TB)/mse_tb.vhdl
+
 # ------------------------------------------------------------------------------
 # Targets
 # ------------------------------------------------------------------------------
 
-.PHONY: all sim_mult sim_lut sim_all clean help
+.PHONY: all sim_mult sim_lut sim_main sim_all clean help
 
 all: sim_all
 
 sim_mult: mse_tb_mult.vcd
 sim_lut:  mse_tb_lut.vcd
-sim_all:  sim_mult sim_lut
+sim_main: mse_tb.vcd
+sim_all:  sim_mult sim_lut sim_main
 
 # ------------------------------------------------------------------------------
 # Regras de simulação
@@ -68,13 +79,23 @@ mse_tb_lut.vcd: $(SRC_LUT) | $(WORK_DIR)
 		--vcd=$@ --stop-time=$(STOP_TIME)
 	@echo ">>> [LUT] Pronto. VCD gerado: $@"
 
+mse_tb.vcd: $(SRC_MAIN) | $(WORK_DIR)
+	@echo ">>> [MAIN] Analisando fontes conjuntas..."
+	@$(GHDL) -a $(STD) $(GHDL_LIBS) --workdir=$(WORK_DIR) $(SRC_MAIN)
+	@echo ">>> [MAIN] Elaborando mse_tb (Testbench com Golden Model)..."
+	@$(GHDL) -e $(STD) $(GHDL_LIBS) --workdir=$(WORK_DIR) mse_tb
+	@echo ">>> [MAIN] Simulando..."
+	@$(GHDL) -r $(STD) $(GHDL_LIBS) --workdir=$(WORK_DIR) mse_tb \
+		--vcd=$@ --stop-time=$(STOP_TIME)
+	@echo ">>> [MAIN] Pronto. VCD gerado: $@"
+
 # ------------------------------------------------------------------------------
 # Limpeza
 # ------------------------------------------------------------------------------
 
 clean:
 	@echo ">>> Removendo artefatos..."
-	@rm -f *.vcd *.o *.cf mse_tb_mult mse_tb_lut
+	@rm -f *.vcd *.o *.cf mse_tb_mult mse_tb_lut mse_tb
 	@rm -rf $(WORK_DIR)
 	@echo ">>> Pronto."
 
@@ -86,5 +107,6 @@ help:
 	@echo "Targets disponíveis:"
 	@echo "  make sim_mult   — compila e simula alternativa MULTIPLICADOR"
 	@echo "  make sim_lut    — compila e simula alternativa LOOKUP TABLE"
-	@echo "  make sim_all    — roda as duas (padrão)"
+	@echo "  make sim_main   — compila e simula Testbench Unificado (Golden Model)"
+	@echo "  make sim_all    — roda as três simulações (padrão)"
 	@echo "  make clean      — remove todos os artefatos gerados"
